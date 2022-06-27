@@ -40,6 +40,7 @@ class ChessGameBoard: ObservableObject {
         let movablePositions = piece.getMovablePositions(on: fromPosition, from: pieces)
         guard movablePositions.contains(toPosition) else { return false }
         
+        pieces[fromPosition] = nil
         pieces[toPosition] = piece
         return true
     }
