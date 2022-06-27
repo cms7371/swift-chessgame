@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum ChessColor {
+enum ChessColor: String {
     case white, black
 }

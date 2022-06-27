@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
-class ChessGameBoard {
-    var pieces: [ChessPosition: ChessPiece] = [:]
-    var turn: ChessColor = .black
+class ChessGameBoard: ObservableObject {
+    @Published var pieces: [ChessPosition: ChessPiece] = [:]
     
     func reset() {
+        pieces = [:]
         pieces[ChessPosition(y: 0, x: 0)] = Luke(color: .black)
         pieces[ChessPosition(y: 0, x: 7)] = Luke(color: .black)
         pieces[ChessPosition(y: 0, x: 1)] = Knight(color: .black)
@@ -29,8 +30,6 @@ class ChessGameBoard {
         pieces[ChessPosition(y: 7, x: 5)] = Bishop(color: .white)
         pieces[ChessPosition(y: 7, x: 4)] = Queen(color: .white)
         (0...7).forEach { pieces[ChessPosition(y: 6, x: $0)] = Pawn(color: .white)}
-        
-        turn = .black
     }
     
     func move(from fromPosition: ChessPosition, to toPosition: ChessPosition) -> Bool {
@@ -41,7 +40,6 @@ class ChessGameBoard {
         let movablePositions = piece.getMovablePositions(on: fromPosition, from: pieces)
         guard movablePositions.contains(toPosition) else { return false }
         
-        pieces[fromPosition] = nil
         pieces[toPosition] = piece
         return true
     }
