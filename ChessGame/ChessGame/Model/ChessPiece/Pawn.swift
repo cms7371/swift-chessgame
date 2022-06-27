@@ -9,10 +9,28 @@ import Foundation
 
 struct Pawn: ChessPiece {
     let color: ChessColor
-    
     let score: Int = 1
+    var icon: String {
+        switch color {
+        case .white:
+            return "♙"
+        case .black:
+            return "♟"
+        }
+    }
     
-    func getMovablePositions(from position: Position) -> [Position] {
-        return []
+    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition : ChessPiece]) -> [ChessPosition] {
+        var offsets = [(0, 1), (0, -1)]
+        if color == .black {
+            offsets.append((1, 0))
+        } else {
+            offsets.append((-1, 0))
+        }
+        let (fromY, fromX) = position.unpackYX
+        let result = offsets.map { (dy, dx) in
+            return ChessPosition(y: fromY + dy, x: fromX + dx)
+        }.filter { $0.isValid() && board[position]?.color != color }
+        
+        return result
     }
 }
