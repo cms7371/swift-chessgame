@@ -10,6 +10,7 @@ import Foundation
 protocol ChessPiece {
     var color: ChessColor { get }
     var score: Int { get }
+    var icon: String { get }
     
-    func getMovablePositions(from position: Position) -> [Position]
+    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition: ChessPiece]) -> [ChessPosition]
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Position: Equatable {
+struct ChessPosition: Hashable {
     var y: Int
     var x: Int
     
