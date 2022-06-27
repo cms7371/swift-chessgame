@@ -100,4 +100,22 @@ class ChessGameTests: XCTestCase {
         
         XCTAssertEqual(luke.getMovablePositions(on: lukePosition, from: board.pieces), [ChessPosition(y: 0, x: 1), ChessPosition(y: 1, x: 2), ChessPosition(y: 1, x: 0)])
     }
+    
+    func testPawnMovablePositions() {
+        let board = ChessGameBoard()
+        
+        let testPawnPosition = ChessPosition(y: 1, x: 1)
+        let testPawn = Pawn(color: .black)
+        board.pieces[testPawnPosition] = testPawn
+        
+        let blackPawnPosition = ChessPosition(y: 2, x: 1)
+        let blackPawn = Pawn(color: .black)
+        board.pieces[blackPawnPosition] = blackPawn
+        
+        let whitePawnPosition = ChessPosition(y: 1, x: 2)
+        let whitePawn = Pawn(color: .white)
+        board.pieces[whitePawnPosition] = whitePawn
+        
+        XCTAssertEqual(testPawn.getMovablePositions(on: testPawnPosition, from: board.pieces), [ChessPosition(y: 1, x: 2), ChessPosition(y: 1, x: 0)])
+    }
 }

@@ -29,7 +29,7 @@ struct Pawn: ChessPiece {
         let (fromY, fromX) = position.unpackYX
         let result = offsets.map { (dy, dx) in
             return ChessPosition(y: fromY + dy, x: fromX + dx)
-        }.filter { $0.isValid() && board[position]?.color != color }
+        }.filter { $0.isValid() && board[$0]?.color != color }
         
         return result
     }
