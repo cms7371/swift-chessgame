@@ -34,27 +34,27 @@ class ChessGameTests: XCTestCase {
     }
 
     func testDisplayBoard() {
-        let gameModel = ChessGameBoard()
-        gameModel.reset()
-        gameModel.displayBoard()
+        let manager = ChessGameManager()
+        manager.resetGame()
+        manager.displayBoard()
     }
     
     func testQueenMovablePosition() {
-        let board = ChessGameBoard()
+        let manager = ChessGameManager()
         
         let queenPosition = ChessPosition(y: 0, x: 4)
         let queen = Queen(color: .black)
-        board.pieces[queenPosition] = queen
+        manager.board[queenPosition] = queen
         
         let blackPawnPosition = ChessPosition(y: 2, x: 4)
         let blackPawn = Pawn(color: .black)
-        board.pieces[blackPawnPosition] = blackPawn
+        manager.board[blackPawnPosition] = blackPawn
         
         let whitePawnPosition = ChessPosition(y: 0, x: 3)
         let whitePawn = Pawn(color: .white)
-        board.pieces[whitePawnPosition] = whitePawn
+        manager.board[whitePawnPosition] = whitePawn
         
-        let movablePositions = queen.getMovablePositions(on: queenPosition, from: board.pieces)
+        let movablePositions = queen.getMovablePositions(on: queenPosition, from: manager.board)
         
         print(movablePositions)
         
@@ -62,60 +62,84 @@ class ChessGameTests: XCTestCase {
     }
     
     func testKnightMovablePositions() {
-        let board = ChessGameBoard()
+        let manager = ChessGameManager()
         
         let knightPosition = ChessPosition(y: 0, x: 1)
         let knight = Knight(color: .black)
-        board.pieces[knightPosition] = knight
+        manager.board[knightPosition] = knight
         
         let blackPawnPosition = ChessPosition(y: 1, x: 1)
         let blackPawn = Pawn(color: .black)
-        board.pieces[blackPawnPosition] = blackPawn
+        manager.board[blackPawnPosition] = blackPawn
         
         let whitePawnPosition = ChessPosition(y: 2, x: 0)
         let whitePawn = Pawn(color: .white)
-        board.pieces[whitePawnPosition] = whitePawn
+        manager.board[whitePawnPosition] = whitePawn
         
-        XCTAssertEqual(knight.getMovablePositions(on: knightPosition, from: board.pieces), [ChessPosition]())
+        XCTAssertEqual(knight.getMovablePositions(on: knightPosition, from: manager.board), Set<ChessPosition>())
         
-        board.pieces.removeValue(forKey: blackPawnPosition)
+        manager.board.removeValue(forKey: blackPawnPosition)
         
-        XCTAssertEqual(knight.getMovablePositions(on: knightPosition, from: board.pieces), [ChessPosition(y: 2, x: 2), ChessPosition(y: 2, x: 0)])
+        XCTAssertEqual(knight.getMovablePositions(on: knightPosition, from: manager.board), Set([ChessPosition(y: 2, x: 2), ChessPosition(y: 2, x: 0)]))
     }
     
     func testLukeMovablePositions() {
-        let board = ChessGameBoard()
+        let manager = ChessGameManager()
         
         let lukePosition = ChessPosition(y: 1, x: 1)
         let luke = Luke(color: .black)
-        board.pieces[lukePosition] = luke
+        manager.board[lukePosition] = luke
         
         let blackPawnPosition = ChessPosition(y: 2, x: 1)
         let blackPawn = Pawn(color: .black)
-        board.pieces[blackPawnPosition] = blackPawn
+        manager.board[blackPawnPosition] = blackPawn
         
         let whitePawnPosition = ChessPosition(y: 1, x: 2)
         let whitePawn = Pawn(color: .white)
-        board.pieces[whitePawnPosition] = whitePawn
+        manager.board[whitePawnPosition] = whitePawn
         
-        XCTAssertEqual(luke.getMovablePositions(on: lukePosition, from: board.pieces), [ChessPosition(y: 0, x: 1), ChessPosition(y: 1, x: 2), ChessPosition(y: 1, x: 0)])
+        XCTAssertEqual(luke.getMovablePositions(on: lukePosition, from: manager.board),
+                       Set([ChessPosition(y: 0, x: 1), ChessPosition(y: 1, x: 2), ChessPosition(y: 1, x: 0)]))
     }
     
     func testPawnMovablePositions() {
-        let board = ChessGameBoard()
+        let manager = ChessGameManager()
         
         let testPawnPosition = ChessPosition(y: 1, x: 1)
         let testPawn = Pawn(color: .black)
-        board.pieces[testPawnPosition] = testPawn
+        manager.board[testPawnPosition] = testPawn
         
         let blackPawnPosition = ChessPosition(y: 2, x: 1)
         let blackPawn = Pawn(color: .black)
-        board.pieces[blackPawnPosition] = blackPawn
+        manager.board[blackPawnPosition] = blackPawn
         
         let whitePawnPosition = ChessPosition(y: 1, x: 2)
         let whitePawn = Pawn(color: .white)
-        board.pieces[whitePawnPosition] = whitePawn
+        manager.board[whitePawnPosition] = whitePawn
         
-        XCTAssertEqual(testPawn.getMovablePositions(on: testPawnPosition, from: board.pieces), [ChessPosition(y: 1, x: 2), ChessPosition(y: 1, x: 0)])
+        XCTAssertEqual(testPawn.getMovablePositions(on: testPawnPosition, from: manager.board), Set([ChessPosition(y: 1, x: 2), ChessPosition(y: 1, x: 0)]))
+    }
+    
+    func testGameManagerSelect() {
+        let manager = ChessGameManager()
+        manager.resetGame()
+        
+        // 선택 취소 케이스
+        XCTAssertTrue(manager.select(position: ChessPosition(y: 0, x: 1)))
+        XCTAssertTrue(manager.select(position: ChessPosition(y: 0, x: 1)))
+        // Black Pawn 한칸 앞으로
+        XCTAssertTrue(manager.select(position: ChessPosition(y: 1, x: 0)))
+        XCTAssertTrue(manager.select(position: ChessPosition(y: 2, x: 0)))
+        // White Pawn 한칸 앞으로
+        XCTAssertTrue(manager.select(position: ChessPosition(y: 6, x: 0)))
+        XCTAssertTrue(manager.select(position: ChessPosition(y: 5, x: 0)))
+        // Black Queen 이동 실패 후 취소
+        XCTAssertTrue(manager.select(position: ChessPosition(y: 0, x: 4)))
+        XCTAssertFalse(manager.select(position: ChessPosition(y: 1, x: 4)))
+        XCTAssertTrue(manager.select(position: ChessPosition(y: 0, x: 4)))
+        // Black Queen 대각 Pawn 제거 후 이동 성공
+        manager.board.removeValue(forKey: ChessPosition(y: 1, x: 3))
+        XCTAssertTrue(manager.select(position: ChessPosition(y: 0, x: 4)))
+        XCTAssertTrue(manager.select(position: ChessPosition(y: 4, x: 0)))
     }
 }

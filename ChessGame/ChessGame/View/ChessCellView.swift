@@ -9,11 +9,16 @@ import SwiftUI
 
 struct ChessCellView: View {
     @EnvironmentObject var gameManager: ChessGameManager
+
     let position: ChessPosition
     
     var body: some View {
         Button {
-            gameManager.select(position: position)
+            let isSuccess = gameManager.select(position: position)
+            if !isSuccess {
+                let hapticGenerator = UINotificationFeedbackGenerator()
+                hapticGenerator.notificationOccurred(.error)
+            }
         } label: {
             Rectangle()
                 .stroke(outlineColor, lineWidth: 5.0)
@@ -25,7 +30,6 @@ struct ChessCellView: View {
                         .modifier(FittingFontSizeModifier())
                 }
         }
-
     }
     
     var outlineColor: Color {
@@ -50,7 +54,7 @@ struct ChessCellView: View {
     }
     
     var pieceIcon: String {
-        guard let piece = gameManager.board.pieces[position] else {
+        guard let piece = gameManager.board[position] else {
             return ""
         }
         return piece.icon

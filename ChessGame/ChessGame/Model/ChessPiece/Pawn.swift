@@ -19,7 +19,7 @@ struct Pawn: ChessPiece {
         }
     }
     
-    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition : ChessPiece]) -> [ChessPosition] {
+    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition : ChessPiece]) -> Set<ChessPosition> {
         var offsets = [(0, 1), (0, -1)]
         if color == .black {
             offsets.append((1, 0))
@@ -31,6 +31,6 @@ struct Pawn: ChessPiece {
             return ChessPosition(y: fromY + dy, x: fromX + dx)
         }.filter { $0.isValid() && board[$0]?.color != color }
         
-        return result
+        return Set(result)
     }
 }

@@ -12,5 +12,5 @@ protocol ChessPiece {
     var score: Int { get }
     var icon: String { get }
     
-    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition: ChessPiece]) -> [ChessPosition]
+    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition: ChessPiece]) -> Set<ChessPosition>
 }

@@ -19,9 +19,9 @@ struct Queen: ChessPiece {
         }
     }
     
-    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition : ChessPiece]) -> [ChessPosition] {
+    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition : ChessPiece]) -> Set<ChessPosition> {
         let offsets = [(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (1, -1), (-1, 1), (-1, -1)]
-        var result = [ChessPosition]()
+        var result = Set<ChessPosition>()
         
         for (dy, dx) in offsets {
             var currentPosition = position
@@ -31,7 +31,7 @@ struct Queen: ChessPiece {
                 let nextPosition = ChessPosition(y: ny, x: nx)
                 if nextPosition.isValid() && board[nextPosition]?.color != color{
                     currentPosition = nextPosition
-                    result.append(nextPosition)
+                    result.update(with: nextPosition)
                 } else {
                     break
                 }

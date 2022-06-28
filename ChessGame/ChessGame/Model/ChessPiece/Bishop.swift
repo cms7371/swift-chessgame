@@ -19,9 +19,9 @@ struct Bishop: ChessPiece {
         }
     }
     
-    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition : ChessPiece]) -> [ChessPosition] {
+    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition : ChessPiece]) -> Set<ChessPosition> {
         let offsets = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
-        var result = [ChessPosition]()
+        var result = Set<ChessPosition>()
         
         for (dy, dx) in offsets {
             var currentPosition = position
@@ -29,7 +29,7 @@ struct Bishop: ChessPiece {
                 let (y, x) = currentPosition.unpackYX
                 let nextPosition = ChessPosition(y: y + dy, x: x + dx)
                 if nextPosition.isValid() && board[nextPosition]?.color != color {
-                    result.append(nextPosition)
+                    result.update(with: nextPosition)
                     currentPosition = nextPosition
                 } else {
                     break

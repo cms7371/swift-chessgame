@@ -19,7 +19,7 @@ struct Knight: ChessPiece {
         }
     }
     
-    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition : ChessPiece]) -> [ChessPosition] {
+    func getMovablePositions(on position: ChessPosition, from board: [ChessPosition : ChessPiece]) -> Set<ChessPosition> {
         let (y, x) = position.unpackYX
         
         let moveOffsets: [(Int, Int)]
@@ -39,6 +39,6 @@ struct Knight: ChessPiece {
             return ChessPosition(y: y + dy, x: x + dx)
         }.filter { $0.isValid() && board[$0]?.color != color }
         
-        return result
+        return Set(result)
     }
 }

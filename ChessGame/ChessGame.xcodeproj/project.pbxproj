@@ -14,7 +14,6 @@
 		C2134D1C286056C80001902F /* ChessGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2134D1B286056C80001902F /* ChessGameTests.swift */; };
 		C2134D26286056C80001902F /* ChessGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2134D25286056C80001902F /* ChessGameUITests.swift */; };
 		C2134D28286056C80001902F /* ChessGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2134D27286056C80001902F /* ChessGameUITestsLaunchTests.swift */; };
-		C2134D3628605A8B0001902F /* ChessGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2134D3528605A8A0001902F /* ChessGameBoard.swift */; };
 		C2134D3828605B400001902F /* ChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2134D3728605B400001902F /* ChessPiece.swift */; };
 		C2134D3B28606E730001902F /* ChessColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2134D3A28606E730001902F /* ChessColor.swift */; };
 		C2134D3D28606F4B0001902F /* Queen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2134D3C28606F4B0001902F /* Queen.swift */; };
@@ -57,7 +56,6 @@
 		C2134D21286056C80001902F /* ChessGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChessGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2134D25286056C80001902F /* ChessGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessGameUITests.swift; sourceTree = "<group>"; };
 		C2134D27286056C80001902F /* ChessGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C2134D3528605A8A0001902F /* ChessGameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessGameBoard.swift; sourceTree = "<group>"; };
 		C2134D3728605B400001902F /* ChessPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessPiece.swift; sourceTree = "<group>"; };
 		C2134D3A28606E730001902F /* ChessColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessColor.swift; sourceTree = "<group>"; };
 		C2134D3C28606F4B0001902F /* Queen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queen.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				C29270A6286996B90045FF41 /* View */,
 				C2134D3428605A7A0001902F /* Model */,
 				C2134D0A286056C70001902F /* ChessGameApp.swift */,
-				C2E131702862A8B800291371 /* ChessGameManager.swift */,
 				C2134D0C286056C70001902F /* ContentView.swift */,
 				C2134D0E286056C80001902F /* Assets.xcassets */,
 				C2134D10286056C80001902F /* Preview Content */,
@@ -159,8 +156,8 @@
 		C2134D3428605A7A0001902F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C2E131702862A8B800291371 /* ChessGameManager.swift */,
 				C2134D3928606DBE0001902F /* ChessPiece */,
-				C2134D3528605A8A0001902F /* ChessGameBoard.swift */,
 				C2134D3A28606E730001902F /* ChessColor.swift */,
 				C2134D4B286078770001902F /* ChessPosition.swift */,
 			);
@@ -332,7 +329,6 @@
 				C2134D472860703D0001902F /* Knight.swift in Sources */,
 				C2134D0D286056C70001902F /* ContentView.swift in Sources */,
 				C2134D4328606FB60001902F /* Bishop.swift in Sources */,
-				C2134D3628605A8B0001902F /* ChessGameBoard.swift in Sources */,
 				C2134D0B286056C70001902F /* ChessGameApp.swift in Sources */,
 				C2134D3828605B400001902F /* ChessPiece.swift in Sources */,
 			);
@@ -493,6 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ChessGame/Preview Content\"";
+				DEVELOPMENT_TEAM = 49J4JD2BU3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -521,6 +518,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ChessGame/Preview Content\"";
+				DEVELOPMENT_TEAM = 49J4JD2BU3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
